@@ -1,36 +1,161 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧠 ONEX: A Simple CRM – Personalization & Campaign Engine
 
-## Getting Started
+Maximize repeat revenue through dynamic segmentation and personalized campaign delivery — built as part of the **Xeno SDE Internship Assignment**.
 
-First, run the development server:
+![Xeno CRM Preview Banner](https://github.com/user-attachments/assets/df7412bb-ccf9-484b-98a2-69f88106d3fc)
+
+
+---
+
+## 🚀 Demo
+
+> 🎥 [Click here for Loom walkthrough](https://www.loom.com/share/69cd5477417641d29040f2621ac1c883?sid=203ffc3f-2bc5-4b96-a207-08cc01568266)
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer        | Technology            |
+|--------------|------------------------|
+| Frontend     | Next.js 14 (App Router) |
+| UI Framework | TailwindCSS + ShadCN/UI |
+| Backend      | Next.js API Routes (Edge Functions) |
+| Database     | MongoDB Atlas         |
+| Auth         | NextAuth.js + Google OAuth |
+| Parsing      | PapaParse             |
+| Message API  | Simulated vendor API with success/failure |
+| Deployment   | Vercel                |
+
+---
+
+## 📦 Features
+
+- ✅ Upload & Parse Customers & Orders CSVs
+- ✅ Store structured data in MongoDB
+- ✅ Dynamic Rule Builder UI (with AND/OR logic)
+- ✅ Create & Save Segments
+- ✅ Launch Campaigns on Segments with message personalization
+- ✅ Simulated message delivery (90% success, 10% fail)
+- ✅ Save Campaign History
+- ✅ Log per-customer communication status
+- ✅ Google OAuth + Route Protection
+- ✅ User-scoped data (all content is per-user)
+
+---
+
+## 🧱 Folder Structure
+
+├── app/
+│ ├── api/
+│ │ ├── upload/ # CSV upload handling
+│ │ ├── query/ # Segment rule execution
+│ │ ├── segments/ # Segment create + fetch
+│ │ ├── campaigns/ # Campaign creation + logs
+│ │ ├── comm-logs/ # Communication logs (per user per campaign)
+│ ├── segments/
+│ │ ├── create/ # Rule builder UI
+│ │ ├── [id]/ # Segment detail + campaign launch
+│ ├── campaigns/
+│ │ ├── [id]/ # Campaign logs
+│ │ ├── page.tsx # Campaign History
+│ ├── auth/ # Auth login page (if custom)
+│ ├── page.tsx # File upload entry
+│
+├── components/
+│ ├── FileUpload.tsx
+│ ├── DataPreview.tsx
+│ ├── RuleBuilder.tsx
+│ ├── Navbar.tsx
+│
+├── lib/
+│ ├── db.ts # DB connection utility
+│
+├── models/
+│ ├── Customer.ts
+│ ├── Order.ts
+│ ├── Segment.ts
+│ ├── Campaign.ts
+│ ├── CommunicationLogs.ts
+│
+├── middleware.ts # Protects routes via NextAuth
+├── .env # Environment variables
+├── README.md
+└── ...
+
+## 🧪 Getting Started (Local Dev)
+
+### 1️⃣ Clone & Install
+
+```bash
+git clone https://github.com/vasu1303/onex.git
+cd onex
+npm install
+
+```
+## Create a .env.local file
+```bash
+MONGODB_URI=your_mongodb_atlas_connection_string
+NEXTAUTH_URL=http://localhost:3000
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_secret
+```
+## Run Dev Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔐 Auth Overview
+- Google OAuth via NextAuth
+- Routes protected via middleware.ts
+- Data is filtered via created_by = user.email
+- Users see only their own segments, campaigns, logs
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔄 Core Logic Summary
+* Rule Builder: Converts UI rules to MongoDB filters ($and, $or, $regex, etc.)
+* Campaign Flow:
+    * Create campaign
+    * Personalize messages using placeholders
+    * Simulate delivery (90% success via Math.random)
+    * Log status for each message
+* Communication Logs: Track message delivery status per customer per campaign
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 📈 Upcoming Features
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- 📤 Real email/SMS integration	Planned
+- 🧩 Dynamic CSV column mapping	Planned
+- 🧼 Empty state designs	Planned
+- 📊 Analytics dashboard	Stretch
+- 🧪 Unit/integration tests	Stretch
+- 🏷️ Campaign tagging / filtering	Stretch
+- 📁 File validation / schema checks	Planned
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
+## API Usage
+- Dummy Vendor API ![image](https://github.com/user-attachments/assets/75cde4c8-baa8-491f-ae05-ac9ce4e234a0)
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Important 
+# Trade offs 
+- The file uploading feature as of now, requires pre-defined columns name only.
+    * Use This: [customers.csv](https://github.com/user-attachments/files/20177615/customers.csv)
+    * Use This: [orders.csv](https://github.com/user-attachments/files/20177650/orders.csv)
+- Due to time Constraints, there is no AI Feature as of now
+- Due to some hard to solve error, the code is not deployed yet. It'll be linked as soon as it's live
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+
+## 🧑‍💻 Author
+# Vasu Singh
+
+>  [LinkedIn](https://www.linkedin.com/in/vasusingh1305/)
+
+
+
