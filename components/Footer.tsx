@@ -11,18 +11,18 @@ const Footer = () => {
   ]
 
   const socials = [
-    { name: 'GitHub', icon: <Github className="h-6 w-6" />, href: 'https://github.com/yourusername' },
-    { name: 'LinkedIn', icon: <Linkedin className="h-6 w-6" />, href: 'https://linkedin.com/in/yourusername' },
-    { name: 'Twitter', icon: <Twitter className="h-6 w-6" />, href: 'https://twitter.com/yourusername' },
+    { name: 'GitHub', icon: <Github className="h-6 w-6" />, href: 'https://github.com/Vasu1303' },
+    { name: 'LinkedIn', icon: <Linkedin className="h-6 w-6" />, href: 'https://www.linkedin.com/in/vasusingh1305/' },
+    
   ]
 
   return (
     <footer className="bg-gradient-to-b from-white to-gray-100">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+      <div className="  px-4 py-12 sm:px-6 lg:px-8">
+        <div className="flex justify-between  ">
           {/* Logo and Description */}
           <div>
-            <h3 className="text-2xl font-bold text-blue-600">OneX</h3>
+            <h3 className="text-2xl font-bold text-blue-600">ONEX</h3>
             <p className="mt-4 text-gray-600 max-w-md">
               Simplify your customer engagement with our powerful CRM solution. 
               Build better relationships, one interaction at a time.
@@ -66,7 +66,7 @@ const Footer = () => {
               ))}
             </div>
             <p className="text-gray-500 text-sm">
-              Made with ❤️ by{' '}
+              Made by{' '}
               <span className="font-medium text-blue-600">Vasu</span>
             </p>
           </div>

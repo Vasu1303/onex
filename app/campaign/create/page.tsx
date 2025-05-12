@@ -6,7 +6,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import {Drum, DrumIcon} from "lucide-react"
+
+import { toast } from "sonner";
+import { DrumIcon } from "lucide-react";
 
 type Customer = {
   customer_id: string;
@@ -48,24 +50,24 @@ export default function CreateCampaignPage() {
   const handleSend = async () => {
     const trimmedCampaignName = campaignName.trim();
     if (!trimmedCampaignName) {
-      alert("Please enter a campaign name");
+      toast("Please enter a campaign name");
       return;
     }
 
     setIsSending(true);
-    // Declare these variables before the try block
+    
     let sent = 0;
     let failed = 0;
 
     try {
-      // Step 1: Create Campaign First
+      
       const campaignPayload = {
         campaign_name: trimmedCampaignName,
         segment_id: segmentId,
         segment_name: segmentName,
         message,
-        sent_count: 0, // temporary
-        failed_count: 0, // temporary
+        sent_count: 0, 
+        failed_count: 0,
         created_by: "Dummy_user",
       };
 
@@ -83,7 +85,6 @@ export default function CreateCampaignPage() {
       const savedCampaign = await res1.json();
       const campaignId = savedCampaign.campaign._id;
 
-      // Step 2: Send messages + Log communication
       for (const customer of customers) {
         const finalMessage = personalizeMessage(message, customer);
 
@@ -112,19 +113,18 @@ export default function CreateCampaignPage() {
 
       setResults({ sent, failed });
 
-      // Optional: Update final counts in campaign
       await fetch(`/api/campaign/${campaignId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ sent_count: sent, failed_count: failed }),
       });
 
-      alert("✅ Campaign completed!");
+      toast("✅ Campaign completed!");
       router.push(`/campaign/${campaignId}`);
 
     } catch (error) {
       console.error("Campaign error:", error);
-      alert("❌ Failed to complete campaign");
+      toast("❌ Failed to complete campaign");
     } finally {
       setIsSending(false);
     }
@@ -136,23 +136,21 @@ export default function CreateCampaignPage() {
         <DrumIcon/> Create Campaign for: <span>{segmentName}</span>
       </h1>
 
-      {/* Increased width using max-w-2xl (equivalent to 42rem/672px) */}
+      
       <div className="space-y-4 mb-6 w-full max-w-2xl">
         <Label className="block font-semibold">Enter Campaign Name</Label>
         <Input
           value={campaignName}
           placeholder="The Saga Sale.."
           onChange={(e) => setCampaignName(e.target.value)}
-          className="w-full" // Added full width
-        />
+          className="w-full" />
 
         <Label className="block font-semibold">Message Template:</Label>
         <Textarea
           placeholder="Hey, check this out!"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className="w-full min-h-[100px]" // Added full width and minimum height
-        />
+          className="w-full min-h-[100px]"  />
       </div>
 
       <Button className="bg-blue-600 hover:bg-blue-400" onClick={handleSend} disabled={isSending || customers.length === 0}>

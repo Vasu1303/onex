@@ -45,7 +45,7 @@ export default function CampaignHistory() {
 
   return (
     
-    <div className="p-8 mt-10">
+    <div className="py-8 mt-16">
       <div className="flex gap-2 items-center justify-center">
         <NotebookText size={30} />
 

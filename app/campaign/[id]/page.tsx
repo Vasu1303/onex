@@ -62,7 +62,7 @@ export default function CampaignLogsPage() {
   }, [campaignId]);
 
   return (
-    <div className="p-8 mt-10">
+    <div className="p-8 mt-16">
       <div className="flex items-center gap-4 mb-6">
         <Button 
           onClick={() => router.push('/campaign')}

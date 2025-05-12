@@ -24,7 +24,7 @@ export default function SegmentDetailPage() {
   }, [id]);
 
   return (
-    <div className="p-8 mt-10">
+    <div className="p-8 mt-16">
         <div className="flex justify-between">
 
       <h1 className="text-2xl font-bold mb-4">Segment: {segmentName}</h1>

@@ -10,7 +10,7 @@ const Features = () => {
       <div className='container mx-auto px-4 py-20 bg-blue-300 rounded-3xl   '>
         <div className='flex flex-col md:flex-row items-center justify-between gap-12  '>
           <div className='flex-1 space-y-6'>
-            <h1 className='text-4xl md:text-6xl font-bold text-white '>
+            <h1 className='text-4xl pl-3 md:text-6xl font-bold text-white '>
               Delight your most valuable customers with <span className='text-blue-600'>exclusive rewards & experiences</span> 
             </h1>
           </div>

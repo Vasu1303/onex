@@ -9,9 +9,10 @@ import { Label } from "@/components/ui/label";
 import {Eye, FileCheck2Icon} from "lucide-react"
 
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 
-// const fields = ["city", "total_spend", "email"];
+
 const operators = ["equals", "contains", ">", "<", ">=", "<="];
 
 type Rule = {
@@ -73,12 +74,12 @@ export default function RuleBuilder() {
     const validRules = rules.filter(rule => rule.field && rule.operator && rule.value);
     
     if (validRules.length === 0) {
-      alert("Please add at least one complete rule");
+      toast("Please add at least one complete rule");
       return;
     }
 
     if(!segmentName.trim()){
-        alert("Please enter a segment name");
+        toast("Please enter a segment name");
         return;
         
     }
@@ -95,7 +96,7 @@ export default function RuleBuilder() {
   
     try {
       // Add artificial delay of 2 seconds
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      
   
       const res = await fetch("/api/query", {
         method: "POST",
@@ -112,11 +113,11 @@ export default function RuleBuilder() {
       setMatchedCount(data.matchCount);
       
       // Add delay before showing count
-      await new Promise(resolve => setTimeout(resolve, 500));
+     
       setIsCountVisible(true);
     } catch (error) {
       console.error("Query failed:", error);
-      alert("Failed to process query");
+      toast("Failed to process query");
     } finally {
       setIsPreviewLoading(false);
     }
@@ -126,7 +127,7 @@ export default function RuleBuilder() {
     setIsCreatingSegment(true);
     try{
 
-        await new Promise(resolve => setTimeout(resolve, 2000))
+        
     const res  =  await fetch("/api/segments", {
         method: "POST",
         headers:{"content-type": "application/json"},

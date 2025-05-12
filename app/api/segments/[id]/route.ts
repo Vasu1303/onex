@@ -4,24 +4,29 @@ import Customer from "@/models/Customer";
 import { NextRequest, NextResponse } from "next/server";
 
 
+interface Rule {
+  field: string;
+  operator: "equals" | "contains" | ">" | "<" | ">=" | "<=";
+  value: string;
+}
+
 export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
   try {
     await connectDB();
 
     const segmentId = params.id;
 
-    // ✅ 1. Fetch the segment by ID
     const segment = await Segment.findById(segmentId);
 
     if (!segment) {
       return NextResponse.json({ error: "Segment not found" }, { status: 404 });
     }
 
-    // ✅ 2. Build MongoDB query from rules
+  
     const rules = segment.rules;
     const combinator = segment.combinator;
 
-    const mongoQuery = rules.map((rule: any) => {
+    const mongoQuery = rules.map((rule: Rule) => {
       const { field, operator, value } = rule;
 
       switch (operator) {

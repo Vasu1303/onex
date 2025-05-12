@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
   const status = isSuccess ? "SENT" : "FAILED";
 
   // Optional: simulate delay
-  await new Promise((res) => setTimeout(res, 200));
+  
 
   // Simulate hitting Delivery Receipt API
   await fetch("http://localhost:3000/api/delivery-receipt", {

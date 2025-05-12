@@ -16,8 +16,9 @@ import { Label } from "@/components/ui/label";
 import Papa from "papaparse";
 import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import DataPreview from "./DataPreview";
-import { Router } from "next/router";
+
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 const FileUpload = () => {
   const [customersFile, setCustomersFile] = useState<File | null>(null);
@@ -65,7 +66,7 @@ const FileUpload = () => {
 
       try {
         //this is an artificial delay
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+       
 
         const res = await fetch("/api/upload", {
           method: "POST",
@@ -88,7 +89,7 @@ const FileUpload = () => {
         setIsLoading(false);
       }
     } else {
-      alert("Upload Files");
+      toast("Upload Files");
     }
   };
   
@@ -128,7 +129,7 @@ const FileUpload = () => {
                   {customersFile && (
                     <Drawer>
                       <DrawerTrigger>
-                        <Button>Preview</Button>
+                        <Button >Preview</Button>
                       </DrawerTrigger>
                       <DrawerContent className="flex p-4 ">
                         <DataPreview parsed={parsedCustomer} />
@@ -174,12 +175,10 @@ const FileUpload = () => {
                 <Button onClick={handlePageNavigation }>Create Rules</Button>
               ) }
             </DialogFooter>
-            {messageCustomer && (
-              <p className="text-green-500"> {messageCustomer}</p>
-            )}
+           
 
-            {messageOrder && <p className="text-green-500">{messageOrder}</p>}
-            {error && <p className="text-red-600">{error}</p>}
+            {messageOrder && toast("Files Uploaded Succesfully")}
+            {error && toast('Error Uploading Files')}
           </DialogContent>
         </Dialog>
       </div>

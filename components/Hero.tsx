@@ -1,13 +1,16 @@
 "use client"
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { Button } from './ui/button'
+import { auth } from '@/auth'
 
-const Hero = () => {
+const Hero =  () => {
+    
   return (
     <section className='rounded-lg py-24 px-18 overflow-x-clip'>
         <div className='container'>
             <div className="flex justify-center mt-2">
+                
                 <motion.span initial={{opacity:0, y:20}} animate={{opacity:1, y:0}} transition={{duration:0.5, delay:1.3}} >
                 <div className="inline-flex py-1 px-3 mt-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full text-neutral-950 font-semibold">
                     

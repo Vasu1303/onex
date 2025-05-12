@@ -2,14 +2,19 @@ import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 import Customer from "@/models/Customer";
 
+interface Rule {
+  field: string;
+  operator: "equals" | "contains" | ">" | "<" | ">=" | "<=";
+  value: string;
+}
 export async function POST(request: Request) {
   try {
-    const { rules, combinator } = await request.json();
+    const { rules, combinator } :{rules: Rule[]; combinator: "AND" | "OR"} = await request.json();
 
     await connectDB();
 
     // Convert rules to MongoDB query
-    const mongoQuery = rules.map((rule: any) => {
+    const mongoQuery = rules.map((rule: Rule) => {
       const { field, operator, value } = rule;
       
       switch (operator) {

@@ -36,7 +36,7 @@ const ShowSegment = () => {
   };
 
   return (
-    <div className="min-h-screen p-8 mt-10 ">
+    <div className="min-h-screen py-8 mt-16 ">
         <div className="flex justify-between"> 
              <h1 className="text-2xl font-bold mb-8 flex-2  ">Your Segments</h1>
              <div className="flex gap-2">
@@ -49,7 +49,7 @@ const ShowSegment = () => {
      
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {segments.map((segment, index) => (
-          <div key={index} className="bg-slate-200 p-6 flex rounded-lg shadow-lg ">
+          <div key={index} className="bg-slate-200 p-6 flex justify-between rounded-lg shadow-lg ">
             <div>
                 <h2 className="text-xl font-semibold mb-4">
               {segment.segment_name}
