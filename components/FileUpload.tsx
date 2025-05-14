@@ -19,7 +19,11 @@ import DataPreview from "./DataPreview";
 
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-
+interface ParseResult {
+  data: string[][];
+  errors: Papa.ParseError[];
+  meta: Papa.ParseMeta;
+}
 const FileUpload = () => {
   const [customersFile, setCustomersFile] = useState<File | null>(null);
   const [ordersFile, setOrdersFile] = useState<File | null>(null);
@@ -27,14 +31,14 @@ const FileUpload = () => {
   const [messageCustomer, setMessageCustomer] = useState("");
   const [messageOrder, setMessageOrder] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [parsedCustomer, setParsedCustomer] = useState<any[][]>([]);
-  const [parsedOrder, setParsedOrder] = useState<any[][]>([]);
+  const [parsedCustomer, setParsedCustomer] = useState<string[][]>([]);
+  const [parsedOrder, setParsedOrder] = useState<string[][]>([]);
   
   const router = useRouter();
 
-  const parseCsv = (file: File, setter: (data: any[][]) => void) => {
+  const parseCsv = (file: File, setter: (data: string[][]) => void) => {
     Papa.parse(file, {
-      complete: (results) => {
+      complete: (results: ParseResult) => {
         setter(results.data);
       },
       header: false,
@@ -65,7 +69,7 @@ const FileUpload = () => {
       formData.append("orderFile", ordersFile);
 
       try {
-        //this is an artificial delay
+       
        
 
         const res = await fetch("/api/upload", {

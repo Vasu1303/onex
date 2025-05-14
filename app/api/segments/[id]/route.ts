@@ -49,8 +49,8 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
 
     const finalQuery = combinator === "AND" ? { $and: mongoQuery } : { $or: mongoQuery };
 
-    // ✅ 3. Fetch matched customers
-    const customers = await Customer.find(finalQuery).limit(100); // you can paginate later
+ 
+    const customers = await Customer.find(finalQuery).limit(100); 
 
     return NextResponse.json({
       segment,

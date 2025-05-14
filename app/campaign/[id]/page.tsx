@@ -13,6 +13,8 @@ import {
 import {ScrollText} from "lucide-react"
 import { Button } from "@/components/ui/button";
 
+//Communication Logs Page
+
 type Log = {
   _id: string;
   customer_id: string;
@@ -73,7 +75,7 @@ export default function CampaignLogsPage() {
         <div className="flex gap-2 justify-center">
              <ScrollText/>
 
-        <h1 className="text-2xl font-bold"> Communication Logs</h1>
+        <h1 className="text-2xl font-bold">Communication Logs</h1>
         </div>
       </div>
 

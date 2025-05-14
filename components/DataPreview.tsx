@@ -1,7 +1,7 @@
 import React from 'react'
 
 interface Props{
-  parsed: any[][],
+  parsed: string[][],
   
   
 }
@@ -20,7 +20,7 @@ const DataPreview = ({parsed}: Props) => {
                                     <tr key={i}>
                                       {row
                                         .slice(0, 6)
-                                        .map((cell: any, j: number) => (
+                                        .map((cell: string | number, j: number) => (
                                           <td
                                             key={j}
                                             className="border px-2 py-1"

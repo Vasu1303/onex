@@ -4,6 +4,29 @@ import Order from "@/models/Orders";
 
 import { NextRequest, NextResponse } from "next/server";
 import Papa from "papaparse";
+interface CustomerData {
+  customer_id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  city: string;
+  total_spend: string;
+  last_order_date: string;
+}
+
+interface OrderData {
+  order_id: string;
+  customer_id: string;
+  product_name: string;
+  quantity: string;
+  total_price: string;
+  category: string;
+  shipping_address: string;
+  city: string;
+  country: string;
+  order_date: string;
+}
 
 
 
@@ -22,23 +45,23 @@ export async function POST(req: NextRequest) {
   const customerBuffer = Buffer.from(await customerFile.arrayBuffer());
   const customerCsv = customerBuffer.toString("utf-8");
 
-  const customerResult = Papa.parse(customerCsv, {
-    header: true,
-    skipEmptyLines: true,
+  const customerResult = Papa.parse<CustomerData>(customerCsv, {
+      header: true,
+      skipEmptyLines: true,
   });
 
   // Parse order file
   const orderBuffer = Buffer.from(await orderFile.arrayBuffer());
   const orderCsv = orderBuffer.toString("utf-8");
 
-  const orderResult = Papa.parse(orderCsv, {
-    header: true,
-    skipEmptyLines: true,
+  const orderResult = Papa.parse<OrderData>(orderCsv, {
+      header: true,
+      skipEmptyLines: true,
   });
 
   try {
     await Customer.insertMany(
-      customerResult.data.map((c: any) => ({
+      customerResult.data.map((c: CustomerData) => ({
         customer_id: c.customer_id?.toString(),
         first_name: c.first_name?.toString(),
         last_name: c.last_name?.toString(),
@@ -53,7 +76,7 @@ export async function POST(req: NextRequest) {
     );
 
     await Order.insertMany(
-      orderResult.data.map((o: any) => ({
+      orderResult.data.map((o: OrderData) => ({
         order_id: o.order_id?.toString(),
         customer_id: o.customer_id?.toString(),
         product: o.product_name?.toString(),

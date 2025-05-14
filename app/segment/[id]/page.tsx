@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { Customer } from "@/app/campaign/create/page";
 
 export default function SegmentDetailPage() {
     const router = useRouter();
@@ -44,7 +45,7 @@ export default function SegmentDetailPage() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {customers.map((c: any, index) => (
+            {customers.map((c: Customer, index) => (
               <TableRow key={index}>
                 <TableCell>{c.first_name} {c.last_name}</TableCell>
                 <TableCell>{c.email}</TableCell>

@@ -13,10 +13,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     error: '/auth/error',
   },
   callbacks: {
-    async session({ session, token }) {
+    async session({ session }) {
       return session
     },
-    async jwt({ token, user, account }) {
+    async jwt({ token, account }) {
       if (account) {
         token.accessToken = account.access_token
       }

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import { Github, Linkedin, Twitter } from 'lucide-react'
+import { Github, Linkedin} from 'lucide-react'
 
 const Footer = () => {
   const links = [

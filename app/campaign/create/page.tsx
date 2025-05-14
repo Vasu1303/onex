@@ -10,11 +10,11 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { DrumIcon } from "lucide-react";
 
-type Customer = {
+export type Customer = {
   customer_id: string;
   email: string;
   first_name: string;
-  [key: string]: any; // for other optional fields like last_name, city etc.
+  [key: string]: string | number | boolean ; // for other optional fields like last_name, city etc.
 };
 
 export default function CreateCampaignPage() {
@@ -43,7 +43,7 @@ export default function CreateCampaignPage() {
     if (segmentId) fetchSegmentData();
   }, [segmentId]);
 
-  const personalizeMessage = (msg: string, customer: any) => {
+  const personalizeMessage = (msg: string, customer: Customer) => {
     return msg.replace(/{first_name}/g, customer.first_name || "friend");
   };
 

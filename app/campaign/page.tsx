@@ -49,7 +49,7 @@ export default function CampaignHistory() {
       <div className="flex gap-2 items-center justify-center">
         <NotebookText size={30} />
 
-      <h1 className="text-2xl font-bold mb-6 text-center">  Campaign History</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center">Campaign History</h1>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
