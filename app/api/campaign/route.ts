@@ -1,6 +1,9 @@
 import { connectDB } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 import Campaign from "@/models/Campaign";
+import { auth } from "@/auth";
+
+
 
 export async function POST(req: NextRequest) {
   try {
@@ -45,8 +48,10 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET() {
+  const session = await auth();
+  const userName =  session?.user?.name;
   await connectDB();
-  const campaigns = await Campaign.find({ created_by: "Dummy_user" }).sort({
+  const campaigns = await Campaign.find({ created_by: userName || "Dummy User" }).sort({
     created_at: -1,
   });
 

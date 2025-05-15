@@ -12,7 +12,7 @@ export async function middleware(request: NextRequest) {
   );
 
   if (isProtectedPath && !session) {
-    const redirectUrl = new URL("/auth/signin", request.url);
+    const redirectUrl = new URL("/", request.url);
     return NextResponse.redirect(redirectUrl);
   }
 

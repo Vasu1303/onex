@@ -9,6 +9,9 @@ import { Input } from "@/components/ui/input";
 
 import { toast } from "sonner";
 import { DrumIcon } from "lucide-react";
+import { useSession } from "next-auth/react";
+
+
 
 export type Customer = {
   customer_id: string;
@@ -17,7 +20,8 @@ export type Customer = {
   [key: string]: string | number | boolean ; // for other optional fields like last_name, city etc.
 };
 
-export default function CreateCampaignPage() {
+export default function CreateCampaignPage()  {
+  const {data:session} = useSession();
   const searchParams = useSearchParams();
   const router = useRouter();
   const segmentId = searchParams.get("segmentId");
@@ -31,6 +35,7 @@ export default function CreateCampaignPage() {
     failed: 0,
   });
   const [isSending, setIsSending] = useState(false);
+  
 
   useEffect(() => {
     const fetchSegmentData = async () => {
@@ -48,6 +53,7 @@ export default function CreateCampaignPage() {
   };
 
   const handleSend = async () => {
+   
     const trimmedCampaignName = campaignName.trim();
     if (!trimmedCampaignName) {
       toast("Please enter a campaign name");
@@ -68,7 +74,7 @@ export default function CreateCampaignPage() {
         message,
         sent_count: 0, 
         failed_count: 0,
-        created_by: "Dummy_user",
+        created_by: session?.user?.name ,
       };
 
       const res1 = await fetch("/api/campaign", {

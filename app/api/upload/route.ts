@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import { connectDB } from "@/lib/db";
 import Customer from "@/models/Customer";
 import Order from "@/models/Orders";
@@ -31,6 +32,8 @@ interface OrderData {
 
 
 export async function POST(req: NextRequest) {
+  const session =  await auth();
+  const userName = session?.user?.name;
   const formData = await req.formData();
   const customerFile = formData.get("customerFile") as File;
   const orderFile = formData.get("orderFile") as File;
@@ -71,7 +74,7 @@ export async function POST(req: NextRequest) {
         total_spend: parseFloat(c.total_spend) || 0,
         last_order_date: c.last_order_date ? new Date(c.last_order_date) : null,
 
-        created_by: "dummy_user_1",
+        created_by: userName,
       }))
     );
 
@@ -89,7 +92,7 @@ export async function POST(req: NextRequest) {
 
         order_date: o.order_date ? new Date(o.order_date) : null,
 
-        created_by: "dummy_user_1",
+        created_by: userName,
       }))
     );
 
@@ -104,8 +107,10 @@ export async function POST(req: NextRequest) {
 }
 
 export async function GET() {
+  const session = await auth();
+  const userName = session?.user?.name;
   await connectDB();
-  const customers = await Customer.find({ created_by: "dummy_user_1" }).limit(
+  const customers = await Customer.find({ created_by:  userName}).limit(
     10
   );
   return NextResponse.json(customers);
