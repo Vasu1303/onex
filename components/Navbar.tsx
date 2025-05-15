@@ -2,8 +2,14 @@ import Link from "next/link";
 import React from "react";
 import { auth } from "@/auth";
 import SignIn from "./Signin";
-
 import { SignOut } from "./Signout";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card"
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -28,7 +34,7 @@ const Navbar = async () => {
             </div>
 
             {session ? (
-              <div className="flex items-center  gap-6">
+              <div className="flex items-center gap-6">
                 <nav className="flex gap-6 font-medium text-gray-800">
                   {navLinks.map((link) => (
                     <Link
@@ -40,8 +46,31 @@ const Navbar = async () => {
                     </Link>
                   ))}
                 </nav>
-
-                <SignOut />
+                
+                <div className="flex items-center gap-4">
+                  <HoverCard>
+                  <div className="flex items-center gap-2">
+                    <HoverCardTrigger>
+                    
+                    <Avatar className="h-8 w-8">
+                      <AvatarImage 
+                        src={session.user?.image || ''} 
+                        alt={session.user?.name || 'User avatar'} 
+                      />
+                      <AvatarFallback>
+                        {session.user?.name?.charAt(0).toUpperCase() || 'U'}
+                      </AvatarFallback>
+                    </Avatar>
+                    </HoverCardTrigger>
+                    <HoverCardContent>
+                         <p>{session.user?.name}</p>
+                    </HoverCardContent>
+                    
+                  </div>
+                  </HoverCard>
+                  
+                  <SignOut />
+                </div>
               </div>
             ) : (
               <SignIn />
