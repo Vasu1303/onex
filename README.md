@@ -5,11 +5,12 @@ Maximize repeat revenue through dynamic segmentation and personalized campaign d
 ![Xeno CRM Preview Banner](https://github.com/user-attachments/assets/df7412bb-ccf9-484b-98a2-69f88106d3fc)
 
 
+
 ---
 
 ## 🚀 Demo
-
-> 🎥 [Click here for Loom walkthrough](https://www.loom.com/share/69cd5477417641d29040f2621ac1c883?sid=203ffc3f-2bc5-4b96-a207-08cc01568266)
+- 💻 [Deployed Link](https://onex-bice.vercel.app/) 
+- 🎥 [Click here for Loom walkthrough](https://www.loom.com/share/69cd5477417641d29040f2621ac1c883?sid=203ffc3f-2bc5-4b96-a207-08cc01568266)
 
 ---
 
