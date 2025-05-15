@@ -36,16 +36,19 @@ const ShowSegment = () => {
   };
 
   return (
-    <div className="min-h-screen py-8 mt-16 ">
-        <div className="flex justify-between"> 
-             <h1 className="text-2xl font-bold mb-8 flex-2  ">Your Segments</h1>
-             <div className="flex gap-2">
-                <FileUpload/>
-      <Button className="bg-blue-600 hover:bg-blue-400" onClick={()=>router.push("/segment/create")} > <PlusIcon/> New Segment</Button>
-
-             </div>
-             
+    <div className="w-full">
+      <div className="flex justify-between items-center mb-8"> 
+        <h1 className="text-2xl font-bold">Your Segments</h1>
+        <div className="flex gap-2">
+          <FileUpload/>
+          <Button 
+            className="bg-blue-600 hover:bg-blue-400" 
+            onClick={() => router.push("/segment/create")}
+          > 
+            <PlusIcon/> New Segment
+          </Button>
         </div>
+      </div>
      
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {segments.map((segment, index) => (
