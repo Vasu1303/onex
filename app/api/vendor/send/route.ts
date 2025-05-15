@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
 
 
   // Simulate hitting Delivery Receipt API
-  await fetch("http://localhost:3000/api/delivery-receipt", {
+  await fetch("https://onex-bice.vercel.app/api/delivery-receipt", {
     method: "POST",
     body: JSON.stringify({
       customer_id: customer.customer_id,
