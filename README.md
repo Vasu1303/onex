@@ -1,6 +1,7 @@
 # 🧠 ONEX: A Simple CRM – Personalization & Campaign Engine
 
 Maximize repeat revenue through dynamic segmentation and personalized campaign delivery.
+
 ![Xeno CRM Preview Banner](https://github.com/user-attachments/assets/df7412bb-ccf9-484b-98a2-69f88106d3fc)
 
 
